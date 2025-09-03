@@ -31,8 +31,6 @@ export default function TaskForm({
   setForm: React.Dispatch<SetStateAction<Task>>
   method: "POST" | "PUT" | "DELETE"
 }) {
-  const queryClient = useQueryClient()
-
   const isUpdate = method === "PUT"
   const isDelete = method === "DELETE"
 
@@ -47,6 +45,8 @@ export default function TaskForm({
       completed: false,
     }))
   }
+
+  const queryClient = useQueryClient()
 
   const mutation = useMutation({
     mutationFn: (formData: Task) => {
