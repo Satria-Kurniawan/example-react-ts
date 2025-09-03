@@ -12,58 +12,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
-import api from "@/lib/axios"
+import { createTask, deleteTask, updateTask } from "@/services"
 import type { Task } from "@/types"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Loader2 } from "lucide-react"
 import { type SetStateAction } from "react"
-
-const createTask = async ({
-  title,
-  description,
-  deadline,
-  completed,
-}: {
-  title: string
-  description: string
-  deadline: string
-  completed: boolean
-}) => {
-  const response = await api.post("/api/tasks", {
-    title,
-    description,
-    deadline,
-    completed,
-  })
-  return response.data
-}
-
-const updateTask = async ({
-  id,
-  title,
-  description,
-  deadline,
-  completed,
-}: {
-  id: string
-  title: string
-  description: string
-  deadline: string
-  completed: boolean
-}) => {
-  const response = await api.put(`/api/tasks/${id}`, {
-    title,
-    description,
-    deadline,
-    completed,
-  })
-  return response.data
-}
-
-const deleteTask = async ({ id }: { id: string }) => {
-  const response = await api.delete(`/api/tasks/${id}`)
-  return response.data
-}
 
 export default function TaskForm({
   show,
